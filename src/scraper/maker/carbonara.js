@@ -1,6 +1,6 @@
 async function carbonara(text) {
   try {
-    const response = await fetch("https://carbonara.solopov.dev/api/cook", {
+    const response = await fetch("https://carbon-api.vercel.app/api", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
