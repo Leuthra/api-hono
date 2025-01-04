@@ -7,16 +7,19 @@ import { pinterest } from "./scraper/search/pinterest.js";
 import { konachan } from "./scraper/search/konachan.js";
 import { bratgenerator } from "./scraper/maker/brat.js";
 import { quotly } from "./scraper/maker/quotly.js";
+import path from "path";
+import fs from "fs";
+import { fileURLToPath } from "url";
 
 const app = new Hono();
 
 app.use("*", serveStatic({ root: "./public" }));
 
+// templates
+const __dirname = path.dirname(fileURLToPath(import.meta.url))
+const home = fs.readFileSync(path.join(__dirname, '../templates/index.html'), 'utf-8')
 app.get("/", (c) => {
-  return c.json({
-    author: "Leuthra",
-    message: "Hello World",
-  });
+  return c.html(home);
 });
 
 app.get("/system/ip", async (c) => {
