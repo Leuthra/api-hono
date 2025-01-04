@@ -1,5 +1,3 @@
-import axios from "axios";
-
 async function carbonara(text) {
   try {
     const response = await fetch("https://carbonara.solopov.dev/api/cook", {
