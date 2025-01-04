@@ -4,7 +4,7 @@ import { serveStatic } from '@hono/node-server/serve-static'
 import { carbonara } from './scraper/maker/carbonara.js'
 import { ai4chat } from './scraper/ai/ai4chat.js'
 import { pinterest } from './scraper/search/pinterest.js'
-import { auth } from 'hono/utils/basic-auth'
+import { konachan } from './scraper/search/konachan.js'
 
 const app = new Hono()
 
@@ -78,6 +78,19 @@ app.get('/api/search/pinterest', async (c) => {
     }
     try {
         const data = await pinterest(text)
+        return c.json({ author: 'Leuthra', result: data })
+    } catch (error) {
+        return c.json({ error: 'Unable to retrieve data' }, 500)
+    }
+})
+
+app.get('/api/search/konachan', async (c) => {
+    const text = c.req.query('text')
+    if (!text) {
+        return c.json({ author: 'Leuthra', error: 'Text is required' }, 400)
+    }
+    try {
+        const data = await konachan(text)
         return c.json({ author: 'Leuthra', result: data })
     } catch (error) {
         return c.json({ error: 'Unable to retrieve data' }, 500)

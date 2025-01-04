@@ -14,3 +14,4 @@ open http://localhost:3000
 2. /api/maker/carbonara (create beautiful code screenshoot)
 3. /api/ai/ai4chat (chat ai model ai4chat)
 4. /api/search/pinterest (search image from pinterest)
+5. /api/search/konachan (Search image anime character)
