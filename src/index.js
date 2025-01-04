@@ -13,7 +13,7 @@ import { fileURLToPath } from "url";
 
 const app = new Hono();
 
-app.use("*", serveStatic({ root: "./public" }));
+app.use("*", serveStatic({ root: "public" }));
 
 // templates
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
