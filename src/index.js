@@ -5,10 +5,8 @@ import { carbonara } from './scraper/carbonara.js'
 
 const app = new Hono()
 
-// Middleware untuk serve static files
 app.use('*', serveStatic({ root: './public' }))
 
-// Route utama
 app.get('/', (c) => {
   return c.json({
     author: 'Leuthra',
@@ -16,7 +14,6 @@ app.get('/', (c) => {
   })
 })
 
-// Route untuk mendapatkan IP pengguna
 app.get('/ip', async (c) => {
   try {
     const response = await fetch('https://ipinfo.io/json')
@@ -33,7 +30,6 @@ app.get('/ip', async (c) => {
   }
 })
 
-// Route untuk mengembalikan gambar dari API Carbonara
 app.get('/api/carbonara', async (c) => {
   const text = c.req.query('text')
   if (!text) {
@@ -51,7 +47,6 @@ app.get('/api/carbonara', async (c) => {
   }
 })
 
-// Handle 404 Not Found
 app.notFound((c) => {
   return c.json({
     author: 'Leuthra',
@@ -59,7 +54,6 @@ app.notFound((c) => {
   })
 })
 
-// Handle Error
 app.onError((err, c) => {
   console.log(`${err}`)
   return c.json({
@@ -68,7 +62,6 @@ app.onError((err, c) => {
   })
 })
 
-// Jalankan server
 const port = 3000
 console.log(`Server is running on http://localhost:${port}`)
 
