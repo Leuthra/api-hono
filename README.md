@@ -13,3 +13,4 @@ open http://localhost:3000
 1. /ip (see ip address)
 2. /api/carbonara (create beautiful code screenshoot)
 3. /api/ai4chat (chat ai model ai4chat)
+4. /api/pinterest (search image from pinterest)
