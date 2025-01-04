@@ -21,6 +21,7 @@ Here is the list of available API endpoints in this project:
 4. /api/search/pinterest (Search image from pinterest)
 5. /api/search/konachan (Search image anime character)
 6. /api/maker/brat (Create text to image generator)
+7. /api/maker/quotly (Create message bubble text)
 
 # notes
 - Please use the API responsibly.
