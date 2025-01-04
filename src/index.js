@@ -39,6 +39,8 @@ app.get('/api/carbonara', async (c) => {
     const data = await carbonara(text)
     return new Response(data, {
       headers: {
+        'cache-control': 'no-store',
+        'Content-Disposition': 'inline; filename="image.png"',
         'Content-Type': 'image/png',
       },
     })
