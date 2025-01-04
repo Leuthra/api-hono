@@ -1,7 +1,9 @@
 import { serve } from '@hono/node-server'
 import { Hono } from 'hono'
 import { serveStatic } from '@hono/node-server/serve-static'
-import { carbonara } from './scraper/carbonara.js'
+import { carbonara } from './scraper/maker/carbonara.js'
+import { ai4chat } from './scraper/ai/ai4chat.js'
+import { auth } from 'hono/utils/basic-auth'
 
 const app = new Hono()
 
@@ -47,6 +49,25 @@ app.get('/api/carbonara', async (c) => {
   } catch (error) {
     return c.json({ error: 'Unable to generate image' }, 500)
   }
+})
+
+app.get('/api/ai4chat', async (c) => {
+    const text = c.req.query('text')
+    if (!text) {
+        return c.json({
+            author: 'Leuthra',
+            error: 'Text is required' 
+        }, 400)
+    }
+    try {
+        const data = await ai4chat(text)
+        return c.json({
+            author: 'Leuthra',
+            result: JSON.parse(data)
+        })
+    } catch (error) {
+        return c.json({ error: 'Unable to retrieve data' }, 500)
+    }
 })
 
 app.notFound((c) => {
