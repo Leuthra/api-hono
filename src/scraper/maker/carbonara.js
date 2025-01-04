@@ -1,19 +1,25 @@
+import { playwright } from "../../function/playwright.js";
+
 async function carbonara(text) {
-  try {
-    const response = await fetch("https://carbon-api.vercel.app/api", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        code: text,
-      }),
-    });
-    const buffer = await response.arrayBuffer();
-    return Buffer.from(buffer);
-  } catch (error) {
-    throw new Error("Unable to generate image");
-  }
+const code = `const { chromium } = require('playwright');
+
+async function carbonara(text) {
+  const browser = await chromium.launch();
+  const page = await browser.newPage();
+  await page.goto(\`https://carbon.now.sh/?code=${encodeURIComponent(text)}\`);
+  await page.waitForSelector(".container-bg");
+  const container = await page.$(".container-bg");
+  const buffer = await container.screenshot();
+  const base64 = buffer.toString("base64");
+
+  await browser.close();
+  return base64;
+}
+
+carbonara('${text}').then(a => console.log(a));`;
+
+  const { output } = await playwright(code.trim());
+  return output;
 }
 
 export { carbonara };

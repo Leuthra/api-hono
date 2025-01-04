@@ -41,7 +41,8 @@ app.get('/api/maker/carbonara', async (c) => {
   }
   try {
     const data = await carbonara(text)
-    return new Response(data, {
+    const buff = Buffer.from(data, 'base64')
+    return new Response(buff, {
       headers: {
         'cache-control': 'no-store',
         'Content-Disposition': 'inline; filename="image.png"',
@@ -49,6 +50,7 @@ app.get('/api/maker/carbonara', async (c) => {
       },
     })
   } catch (error) {
+    console.log(error)
     return c.json({ error: 'Unable to generate image' }, 500)
   }
 })
