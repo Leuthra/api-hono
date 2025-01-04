@@ -4,9 +4,9 @@
   "main": "src/index.js",
   "type": "module",
   "scripts": {
-    "start": "node src/index.js",
+    "start": "bun src/index.js",
     "dev": "nodemon src/index.js",
-    "test": "node test.js"
+    "test": "bun test.js"
   },
   "keywords": [],
   "author": "",
