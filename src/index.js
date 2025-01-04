@@ -3,7 +3,6 @@ import { Hono } from 'hono'
 import { serveStatic } from '@hono/node-server/serve-static'
 import { carbonara } from './scraper/maker/carbonara.js'
 import { ai4chat } from './scraper/ai/ai4chat.js'
-import { auth } from 'hono/utils/basic-auth'
 
 const app = new Hono()
 
