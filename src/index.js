@@ -17,7 +17,7 @@ app.get('/', (c) => {
   })
 })
 
-app.get('/ip', async (c) => {
+app.get('/system/ip', async (c) => {
   try {
     const response = await fetch('https://ipinfo.io/json')
     const data = await response.json()
@@ -33,7 +33,7 @@ app.get('/ip', async (c) => {
   }
 })
 
-app.get('/api/carbonara', async (c) => {
+app.get('/api/maker/carbonara', async (c) => {
   const text = c.req.query('text')
   if (!text) {
     return c.json({ error: 'Text is required' }, 400)
@@ -52,7 +52,7 @@ app.get('/api/carbonara', async (c) => {
   }
 })
 
-app.get('/api/ai4chat', async (c) => {
+app.get('/api/ai/ai4chat', async (c) => {
     const text = c.req.query('text')
     if (!text) {
         return c.json({
@@ -71,7 +71,7 @@ app.get('/api/ai4chat', async (c) => {
     }
 })
 
-app.get('/api/pinterest', async (c) => {
+app.get('/api/search/pinterest', async (c) => {
     const text = c.req.query('text')
     if (!text) {
         return c.json({ author: 'Leuthra', error: 'Text is required' }, 400)
