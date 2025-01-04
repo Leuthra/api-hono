@@ -16,7 +16,8 @@
     "@hono/node-server": "^1.13.7",
     "axios": "^1.7.9",
     "cheerio": "^1.0.0",
-    "hono": "^4.6.15"
+    "hono": "^4.6.15",
+    "playwright": "^1.49.1"
   },
   "devDependencies": {
     "nodemon": "^3.1.9"

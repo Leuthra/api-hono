@@ -5,6 +5,7 @@ import { carbonara } from './scraper/maker/carbonara.js'
 import { ai4chat } from './scraper/ai/ai4chat.js'
 import { pinterest } from './scraper/search/pinterest.js'
 import { konachan } from './scraper/search/konachan.js'
+import { bratgenerator } from './scraper/maker/brat.js'
 
 const app = new Hono()
 
@@ -94,6 +95,26 @@ app.get('/api/search/konachan', async (c) => {
         return c.json({ author: 'Leuthra', result: data })
     } catch (error) {
         return c.json({ error: 'Unable to retrieve data' }, 500)
+    }
+})
+
+app.get('/api/maker/brat', async (c) => {
+    const text = c.req.query('text')
+    if (!text) {
+        return c.json({ author: 'Leuthra', error: 'Text is required' }, 400)
+    }
+    try {
+        const data = await bratgenerator(text)
+        const buff = Buffer.from(data, 'base64')
+        return new Response(buff, {
+            headers: {
+                'cache-control': 'no-store',
+                'Content-Disposition': 'inline; filename="image.png"',
+                'Content-Type': 'image/png',
+            },
+        })
+    } catch (error) {
+        return c.json({ error: 'Unable to generate image' }, 500)
     }
 })
 
