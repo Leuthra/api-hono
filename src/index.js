@@ -13,8 +13,6 @@ import { fileURLToPath } from "url";
 
 const app = new Hono();
 
-app.use("*", serveStatic({ root: "public" }));
-
 // templates
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const home = fs.readFileSync(path.join(__dirname, '../templates/index.html'), 'utf-8')
