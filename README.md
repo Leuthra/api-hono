@@ -27,3 +27,4 @@ Here is the list of available API endpoints in this project:
 - Please use the API responsibly.
 - Do not perform DDOS attacks or attempt to harm the website preview.
 - This project is built for educational and personal development purposes only. Any misuse of the API may result in access restrictions.
+- For the speed of this project is not good because it uses playwright worker + vercel free, if you want to be responsive quickly, you can change to using other hosting or use playwright local.
