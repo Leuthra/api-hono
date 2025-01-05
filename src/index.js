@@ -13,10 +13,6 @@ import { handle } from "hono/vercel";
 
 const app = new Hono();
 
-export const config = {
-  runtime: "edge",
-};
-
 // templates
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const home = fs.readFileSync(
