@@ -13,9 +13,16 @@ import { fileURLToPath } from "url";
 
 const app = new Hono();
 
+export const config = {
+  runtime: "edge",
+};
+
 // templates
-const __dirname = path.dirname(fileURLToPath(import.meta.url))
-const home = fs.readFileSync(path.join(__dirname, '../templates/index.html'), 'utf-8')
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const home = fs.readFileSync(
+  path.join(__dirname, "../templates/index.html"),
+  "utf-8"
+);
 app.get("/", (c) => {
   return c.html(home);
 });
@@ -53,7 +60,10 @@ app.get("/api/maker/carbonara", async (c) => {
     });
   } catch (error) {
     console.log(error);
-    return c.json({ author: 'Leuthra', error: "Unable to generate image" }, 500);
+    return c.json(
+      { author: "Leuthra", error: "Unable to generate image" },
+      500
+    );
   }
 });
 
@@ -75,7 +85,7 @@ app.get("/api/ai/ai4chat", async (c) => {
       result: JSON.parse(data),
     });
   } catch (error) {
-    return c.json({ author: 'Leuthra', error: "Unable to retrieve data" }, 500);
+    return c.json({ author: "Leuthra", error: "Unable to retrieve data" }, 500);
   }
 });
 
@@ -88,7 +98,7 @@ app.get("/api/search/pinterest", async (c) => {
     const data = await pinterest(text);
     return c.json({ author: "Leuthra", result: data });
   } catch (error) {
-    return c.json({ author: 'Leuthra', error: "Unable to retrieve data" }, 500);
+    return c.json({ author: "Leuthra", error: "Unable to retrieve data" }, 500);
   }
 });
 
@@ -101,7 +111,7 @@ app.get("/api/search/konachan", async (c) => {
     const data = await konachan(text);
     return c.json({ author: "Leuthra", result: data });
   } catch (error) {
-    return c.json({ author: 'Leuthra', error: "Unable to retrieve data" }, 500);
+    return c.json({ author: "Leuthra", error: "Unable to retrieve data" }, 500);
   }
 });
 
@@ -121,7 +131,10 @@ app.get("/api/maker/brat", async (c) => {
       },
     });
   } catch (error) {
-    return c.json({ author: 'Leuthra', error: "Unable to generate image" }, 500);
+    return c.json(
+      { author: "Leuthra", error: "Unable to generate image" },
+      500
+    );
   }
 });
 
@@ -132,7 +145,10 @@ app.get("/api/maker/quotly", async (c) => {
   const theme = c.req.query("theme") || "gelap";
 
   if (!avatar || !name || !text) {
-    return c.json({ author: 'Leuthra', error: "Avatar, name, and text are required" }, 400);
+    return c.json(
+      { author: "Leuthra", error: "Avatar, name, and text are required" },
+      400
+    );
   }
 
   try {
@@ -147,7 +163,10 @@ app.get("/api/maker/quotly", async (c) => {
       },
     });
   } catch (error) {
-    return c.json({ author: 'Leuthra', error: "Unable to generate image" }, 500);
+    return c.json(
+      { author: "Leuthra", error: "Unable to generate image" },
+      500
+    );
   }
 });
 
