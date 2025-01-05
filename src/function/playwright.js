@@ -1,7 +1,13 @@
 import axios from "axios";
 
+const cache = new Map();
+
 const playwright = async (code) => {
   try {
+    if (cache.has(code)) {
+      return cache.get(code);
+    }
+
     const url = "https://try.playwright.tech/service/control/run";
     const headers = {
       authority: "try.playwright.tech",
@@ -15,7 +21,11 @@ const playwright = async (code) => {
       code: code,
       language: "javascript",
     };
+
     const response = await axios.post(url, data, { headers });
+
+    cache.set(code, response.data);
+
     return response.data;
   } catch (error) {
     console.error("Error running playwright code:", error);
