@@ -9,7 +9,6 @@ import { quotly } from "./scraper/maker/quotly.js";
 import path from "path";
 import fs from "fs";
 import { fileURLToPath } from "url";
-import { handle } from "hono/vercel";
 
 const app = new Hono();
 
@@ -184,8 +183,4 @@ app.onError((err, c) => {
 const port = 3000;
 console.log(`Server is running on http://localhost:${port}`);
 
-if (process.env.VERCEL) {
-    handle(app)
-} else {
-    serve({ fetch: app.fetch, port });
-}
+serve({ fetch: app.fetch, port });
