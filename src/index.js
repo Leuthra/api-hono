@@ -1,6 +1,5 @@
 import { serve } from "@hono/node-server";
 import { Hono } from "hono";
-import { serveStatic } from "@hono/node-server/serve-static";
 import { carbonara } from "./scraper/maker/carbonara.js";
 import { ai4chat } from "./scraper/ai/ai4chat.js";
 import { pinterest } from "./scraper/search/pinterest.js";
@@ -10,6 +9,7 @@ import { quotly } from "./scraper/maker/quotly.js";
 import path from "path";
 import fs from "fs";
 import { fileURLToPath } from "url";
+import { handle } from "hono/vercel";
 
 const app = new Hono();
 
@@ -188,4 +188,8 @@ app.onError((err, c) => {
 const port = 3000;
 console.log(`Server is running on http://localhost:${port}`);
 
-serve({ fetch: app.fetch, port });
+if (process.env.VERCEL) {
+    handle(app)
+} else {
+    serve({ fetch: app.fetch, port });
+}
